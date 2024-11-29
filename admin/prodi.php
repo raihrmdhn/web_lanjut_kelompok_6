@@ -18,7 +18,7 @@
 </head>
 
 <?php
-// Include the PDO connection file
+
 include 'koneksi.php';
 
 $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
@@ -56,7 +56,7 @@ switch ($aksi) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                    // Fetch data using PDO
+                                
                                     $stmt = $pdo->query("SELECT * FROM prodi");
                                     $no = 1;
                                     while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -128,7 +128,7 @@ switch ($aksi) {
     break;
 
     case 'edit':
-        // Fetch data for edit using PDO
+        
         $stmt = $pdo->prepare("SELECT * FROM prodi WHERE id = :id");
         $stmt->execute(['id' => $_GET['id']]);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
