@@ -2,7 +2,7 @@
 
 
 <?php
-include 'koneksi.php'; // Assuming the PDO connection is set up correctly
+include 'koneksi.php'; 
 
 $aksi = isset($_GET['aksi']) ? $_GET['aksi'] : 'list';
 
@@ -40,7 +40,7 @@ switch ($aksi) {
                                         </thead>
                                         <tbody>
                                             <?php
-                                            // Fetch user data using PDO
+                                          
                                             $sql = "SELECT user.*, level.level_name FROM user JOIN level ON level.id = user.level";
                                             $stmt = $pdo->query($sql);
 
@@ -92,7 +92,7 @@ switch ($aksi) {
                         </div>
                         <form action="prosesUser.php?proses=insert" method="post" enctype="multipart/form-data" class="mt-4">
                             <div class="card-body">
-                                <!-- Email Input -->
+                               
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
@@ -100,7 +100,6 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- Password Input -->
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Password</label>
                                     <div class="col-sm-10">
@@ -108,14 +107,14 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- Level Selection -->
+                              
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Level</label>
                                     <div class="col-sm-10">
                                         <select name="level" class="form-control" required>
                                             <option value="">-Pilih level-</option>
                                             <?php
-                                            // Fetch levels using PDO
+                                           
                                             $sql = "SELECT * FROM level";
                                             $stmt = $pdo->query($sql);
                                             while ($data_level = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -126,7 +125,7 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- Nama Lengkap Input -->
+                           
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Lengkap</label>
                                     <div class="col-sm-10">
@@ -134,7 +133,7 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- No Telepon Input -->
+                               
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">No Telepon</label>
                                     <div class="col-sm-10">
@@ -142,7 +141,7 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- Photo Upload -->
+                           
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Photo</label>
                                     <div class="col-sm-10">
@@ -157,7 +156,7 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- Alamat Textarea -->
+                              
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Alamat</label>
                                     <div class="col-sm-10">
@@ -178,7 +177,7 @@ switch ($aksi) {
         break;
 
     case 'edit':
-        // Fetch user data using PDO
+      
         $stmt = $pdo->prepare("SELECT * FROM user WHERE id = :id");
         $stmt->execute(['id' => $_GET['id']]);
         $data_user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -198,7 +197,7 @@ switch ($aksi) {
                         <form action="prosesUser.php?proses=edit" method="post" enctype="multipart/form-data" class="mt-4">
                             <input type="hidden" name="id" value="<?= htmlspecialchars($data_user['id']) ?>">
                             <div class="card-body">
-                                <!-- Email Input -->
+                                
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
@@ -206,7 +205,7 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- Password Input -->
+                               
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Password</label>
                                     <div class="col-sm-10">
@@ -214,13 +213,13 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- Level Selection -->
+                              
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Level</label>
                                     <div class="col-sm-10">
                                         <select name="level" class="form-control" required>
                                             <?php
-                                            // Fetch levels using PDO
+                                          
                                             $stmt = $pdo->query("SELECT * FROM level");
                                             while ($data_level = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                                 echo "<option value='" . $data_level['id'] . "'" . ($data_user['level'] == $data_level['id'] ? ' selected' : '') . ">" . htmlspecialchars($data_level['level_name']) . "</option>";
@@ -230,7 +229,7 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- Nama Lengkap Input -->
+                               
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Lengkap</label>
                                     <div class="col-sm-10">
@@ -238,7 +237,7 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- No Telepon Input -->
+                               
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">No Telepon</label>
                                     <div class="col-sm-10">
@@ -246,7 +245,7 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- Photo Upload -->
+                               
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Photo</label>
                                     <div class="col-sm-10">
@@ -255,7 +254,7 @@ switch ($aksi) {
                                     </div>
                                 </div>
 
-                                <!-- Alamat Textarea -->
+                             
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Alamat</label>
                                     <div class="col-sm-10">
